@@ -7,10 +7,12 @@ services:
     name: attendance-studio
     runtime: docker
     dockerfilePath: ./Dockerfile
-    # NOTE: "free" spins the service down after idle, which clears the
-    # in-memory logins and cached reports. Use an always-on plan (starter+)
-    # for a login that survives, or expect users to sign in again after idle.
-    plan: starter
+    # Free plan: no card required, but the service spins down after 15 min idle
+    # (about a minute to wake). That clears in-memory logins and cached reports,
+    # so users sign in again after idle. Switch to "starter" ($7/mo) for an
+    # always-on instance. Note: the free plan shares 750 instance-hours/month
+    # across the whole workspace, so avoid running two always-on free services.
+    plan: free
     healthCheckPath: /api/health
     # Exactly one instance: sessions and cached reports live in process memory.
     numInstances: 1
