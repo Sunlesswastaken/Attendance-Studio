@@ -1,0 +1,27 @@
+# Windows-only portable runtime and launcher (not used by the hosted build)
+runtime/
+*.exe
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# Environment / secrets (keep the example)
+.env
+.env.*
+!.env.example
+
+# Node tooling (frontend/dist is committed because the server serves it)
+node_modules/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

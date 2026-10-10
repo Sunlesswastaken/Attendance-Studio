@@ -1,0 +1,23 @@
+# Build context excludes for the hosted (Linux) image.
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+.venv
+venv
+__pycache__
+*.py[cod]
+*.pyo
+node_modules
+
+# Windows-only portable runtime and launcher
+runtime
+*.exe
+
+# Repo/deploy metadata not needed at runtime
+render.yaml
+.DS_Store
+Thumbs.db
+.vscode
+.idea

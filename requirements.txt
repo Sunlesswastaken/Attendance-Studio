@@ -1,0 +1,17 @@
+# Pinned to the versions bundled with the portable Windows runtime so the
+# hosted (Linux) build behaves identically.
+fastapi==0.143.0
+uvicorn==0.54.0
+pydantic==2.14.0
+python-multipart==0.0.32
+pandas==3.0.6
+numpy==2.5.3
+openpyxl==3.1.5
+xlrd==2.0.2
+pdfplumber==0.11.10
+pdfminer.six==20260107
+reportlab==5.0.1
+httpx==0.28.1
+pillow==12.3.0
+cryptography==50.0.2
+pypdfium2==5.14.0

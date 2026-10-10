@@ -1,0 +1,34 @@
+# Render Blueprint for Attendance Studio.
+# Create a new Blueprint instance from this repo and Render provisions the
+# Docker web service below. Secret values (sync: false) are prompted for in
+# the dashboard and are never stored in the repo.
+services:
+  - type: web
+    name: attendance-studio
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    # NOTE: "free" spins the service down after idle, which clears the
+    # in-memory logins and cached reports. Use an always-on plan (starter+)
+    # for a login that survives, or expect users to sign in again after idle.
+    plan: starter
+    healthCheckPath: /api/health
+    # Exactly one instance: sessions and cached reports live in process memory.
+    numInstances: 1
+    autoDeploy: true
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: OPEN_BROWSER
+        value: "0"
+      - key: COOKIE_SECURE
+        value: "1"
+      - key: NOMINAL_ROLLS_DIR
+        value: /app/NOMINAL ROLLS
+      - key: ATTENDANCE_TEST_USERNAME
+        sync: false
+      - key: ATTENDANCE_TEST_PASSWORD
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        sync: false

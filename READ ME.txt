@@ -1,0 +1,14 @@
+ATTENDANCE STUDIO
+
+1. Right-click the ZIP and choose Extract All.
+2. Open the extracted folder.
+3. Double-click Attendance Studio.exe. Your browser opens automatically.
+
+Login credentials are provided separately. Ask the administrator.
+
+For Windows 10/11 x64. No installation or internet needed.
+Keep the folders beside Attendance Studio.exe; do not copy only the EXE.
+An HTML file alone cannot start this local application.
+
+Discrepancy = CDC absent and class present, for eligible CDC students only.
+Absent in both or present in CDC/absent in class does not count.
