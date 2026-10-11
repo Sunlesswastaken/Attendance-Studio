@@ -354,17 +354,18 @@ def compare_college(cdc, activity_rows, selected_date):
         item['Sources'].add(source)
         item['Reasons'].add(reason)
     coverage = {(r['batch'], r['branch']) for r in cdc['coverage']}
+    # The CDC summary's batch/branch coverage defines the cohort. The nominal-roll
+    # FN/AN folder labels are not a reliable CDC-session tag (a batch can be filed
+    # under one session yet attend CDC in the other), so they must not drop students.
     cohort = {roll: r for roll, r in students.items() if has_cdc_batch(r) and r['semester'] == cdc['semester'] and (r['batch'], r['branch']) in coverage}
-    # A batch match alone cannot establish presence in the other CDC session.
-    cohort = {roll: r for roll, r in cohort.items() if r.get('session', cdc['session']) == cdc['session']}
     if 'cohort_rolls' in cdc:
         included = set(cdc['cohort_rolls'])
         cohort = {roll:r for roll,r in cohort.items() if roll in included}
     # An explicit CDC absentee roll is attendance evidence; batch/name labels
-    # must not suppress it. Keep section/semester/session checks for class scope.
+    # must not suppress it. Keep section/semester checks for class scope.
     for roll in cdc['absentees']:
         student = students.get(roll)
-        if student and student['semester'] == cdc['semester'] and student.get('session', cdc['session']) == cdc['session']:
+        if student and student['semester'] == cdc['semester']:
             cohort[roll] = student
     if not cohort:
         raise ValueError('No students in the nominal rolls match the CDC attendance rolls or batch/branch summary.')
@@ -381,7 +382,7 @@ def compare_college(cdc, activity_rows, selected_date):
         if student is None:
             continue  # A matching class row can establish the section below.
         if roll not in cohort:
-            omit(roll, 'CDC semester or session does not match the nominal rolls.', 'CDC')
+            omit(roll, 'CDC semester does not match the nominal rolls.', 'CDC')
         elif student['branch'] != record['branch']:
             omit(roll, 'CDC branch does not match the class roster; class membership is unresolved.', 'CDC')
     sessions = {'FN': range(1, 4), 'AN': range(4, 7)}
